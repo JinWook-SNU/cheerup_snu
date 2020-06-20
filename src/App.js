@@ -7,8 +7,8 @@ function App() {
 
   const api = new Api();
 
-  const postBoard = () => {
-    api.postBoard()
+  const postBoard = (college, text) => {
+    api.postBoard(college, text)
   }
 
   const loadBoardList = () => {
@@ -24,18 +24,16 @@ function App() {
 
   return (
     <div className="App">
-      
-      
       <header className="App-header">
         <div>
-          <button onClick={postBoard}> postBoard </button>
+          <button onClick={postBoard('농생대','힘내세요!!')}> postBoard </button>
           <div>
             { (boardList) ? boardList.map((board) => <div> {board.text} </div>) : <div>게시글없음.</div>}
           </div>
           <button onClick={loadBoardList}> loadBoardList! </button>
           <button onClick={api.signInWithGoogle}> Sign in with Google </button>
-          <button onClick={api.signInWithEmail}> Sign in with Email </button>
-          <button onClick={api.signUpWithEmail}> Sign up with Email </button>
+          <button onClick={api.signInWithEmail('wlsdnr330@snu.ac.kr','password')}> Sign in with Email </button>
+          <button onClick={api.signUpWithEmail('wlsdnr330@snu.ac.kr','password')}> Sign up with Email </button>
           <button onClick={api.changeUserStatus}> User Status </button>
           <button onClick={api.sendEmailVerification}> Send-Email </button>
         </div>

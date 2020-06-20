@@ -11,10 +11,9 @@ export default class Api {
   }
 
   //일단은 샘플로 넣어놓겠습니다.
-  localLogin(userCollege, userName, userEmail) {
-    localStorage.setItem('userCollege', '경영대');
-    localStorage.setItem('userName', '홍길동');
-    localStorage.setItem('userEmail', 'sample@snu.ac.kr');
+  localLogin(userName, userEmail) {
+    localStorage.setItem('userName', userName);
+    localStorage.setItem('userEmail', userEmail);
   }
 
   //구글로 로그인
@@ -33,6 +32,7 @@ export default class Api {
       var errorMessage = error.message;
       // ...
       console.log(errorCode, errorMessage);
+      this.changeUserStatus();
     });
   }
 
@@ -64,30 +64,29 @@ export default class Api {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
+        var userName = user.displayName;
+        var userEmail = user.email;
         var emailVerified = user.emailVerified;
         var photoURL = user.photoURL;
         var isAnonymous = user.isAnonymous;
         var uid = user.uid;
         var providerData = user.providerData;
         // ...
-        console.log(email);
         console.log(emailVerified);
+        // this.localLogin(userName, userEmail)
       } else {
-        // User is signed out.
-        // ...
+
       }
     });
   }
 
 
-  postBoard(text) {
+  postBoard(College,text) {
     var newPostKey = firebase.database().ref().child('posts').push().key;
     //15개 단과대
     var postData = {
       "Key": newPostKey,
-      "College":localStorage.getItem('userCollege'),
+      "College":College,
       "writerName":localStorage.getItem('userName'),
       "writerEmail":localStorage.getItem('userEmail'),
       "text": text,

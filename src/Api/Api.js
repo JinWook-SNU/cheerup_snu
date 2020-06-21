@@ -53,16 +53,13 @@ export default class Api {
     });
   }
 
-
   //5. 로그인 - 유저 정보 가져오기 + 로컬에 정보 저장/ 이 단계 이후로 글쓰기 가능!
   getUserStatus() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        // User is signed in.
         var userName = user.displayName;
         var userEmail = user.email;
         var emailVerified = user.emailVerified;
-        // ...
         console.log(emailVerified);
         console.log(userName);
         console.log(userEmail);
@@ -75,12 +72,12 @@ export default class Api {
     });
   }
 
-
   //로그아웃 함수
   signOut(){
     firebase.auth().signOut().then(function() {
     }).catch(function(error) {
     });
+    localStorage.clear();
   }
 
   //메인 - 게시물 작성하기
@@ -98,7 +95,6 @@ export default class Api {
     updates['/board/' + newPostKey] = postData;
     firebase.database().ref().update(updates);
   }
-
 
   //메인 - 게시물 받아오기
   loadBoardList() {

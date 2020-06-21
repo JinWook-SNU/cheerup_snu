@@ -35,6 +35,7 @@ function App() {
           <button onClick={()=>{api.signUpWithEmail('wlsdnr330@snu.ac.kr','password')}}> Sign up with Email </button>
           <button onClick={()=>{api.getUserStatus()}}> User Status </button>
           <button onClick={()=>{api.sendEmailVerification()}}> Send-Email </button>
+          <button onClick={()=>{api.signOut()}}> logout </button>
           <form>
             <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
             <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />

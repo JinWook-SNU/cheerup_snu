@@ -77,8 +77,7 @@ function App() {
                 <MenuItem value={"의대"}>의대</MenuItem>
                 <MenuItem value={"사범대"}>사범대</MenuItem>
               </Select>
-              <button type="submit" id="submit-button"> 응원하기 </button>
-              <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>postBoard</button>
+              <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>
             </form>
           </div>
           <div>

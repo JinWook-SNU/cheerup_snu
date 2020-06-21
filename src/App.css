@@ -36,3 +36,42 @@
     transform: rotate(360deg);
   }
 }
+
+
+#message-box {
+  width: 300px;
+  margin-right: 30px;
+};
+
+#submit-button {
+  align-items: center;
+}
+
+#user-box {
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  width: 150px;
+  margin: 5px;
+  justify-content: center;
+  background-color: gray;
+  border-radius : 5%;
+}
+
+#content-box {
+  position: relative;
+  flex-direction: column;
+  height: 40px;
+  width: 700px;
+  margin: 5px;
+  justify-content: center;
+  background-color: white;
+  color: black;
+}
+
+#content-box #date-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 6px;
+}

@@ -118,7 +118,7 @@ export default class Api {
       snapshot.forEach((childSnapshot) => {
           var childData = childSnapshot.val();
           childData.date = dateFormat(childData.date,"yyyy-mm-dd");
-          rows.push(childData);
+          rows.unshift(childData);
       })
       return (rows);
   })

@@ -73,8 +73,6 @@ function App() {
               <button onClick={postBoard('경영대','힘내세요!!')}>postBoard</button>
             </form>
           </div>
-        </div>
-        <div>
           <div>
             { (boardList) ? boardList.map((board) => <Board board={board} key={board.Key}/>) : <div>게시글없음.</div>}
           </div>

@@ -45,7 +45,6 @@ export default class Api {
       }
     });
   }
-  
   //이메일로 로그인
   signInWithEmail(email, password){
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {

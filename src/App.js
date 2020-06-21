@@ -12,20 +12,6 @@ function App() {
   const [userName, setUserName] = useState('');
   const api = new Api();
 
-  // 시간 나타내기!
-  function timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return time;
-  }
-
 
   // 응원글 reload
   const loadBoardList = async() => {
@@ -62,6 +48,7 @@ function App() {
               <Select
                 value={chatCollege}
                 onChange={handleSelectCollege}
+                style={{width:100}}
               >
                 <MenuItem value={"경영대"}>경영대</MenuItem>
                 <MenuItem value={"인문대"}>인문대</MenuItem>
@@ -76,7 +63,7 @@ function App() {
                 <MenuItem value={"의대"}>의대</MenuItem>
                 <MenuItem value={"사범대"}>사범대</MenuItem>
               </Select>
-              <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>postBoard</button>
+              <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>
             </form>
           </div>
           <div>

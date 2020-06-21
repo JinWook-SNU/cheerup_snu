@@ -4,6 +4,9 @@ import Api from './Api/Api';
 import {Board} from './Board';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+
 
 function App() {
   const [boardList, setBoardList] = useState([]);
@@ -77,6 +80,9 @@ function App() {
                 <MenuItem value={"의대"}>의대</MenuItem>
                 <MenuItem value={"사범대"}>사범대</MenuItem>
               </Select>
+              <Button onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
+                응원하기
+              </Button>
               <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>
             </form>
           </div>

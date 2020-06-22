@@ -1,0 +1,24 @@
+.input {
+	height: 40px;
+	line-height: 1;
+	font-size: 1.1rem;
+	border: 1px solid #eaeaea;
+	outline: none;
+	color: #b4b4b4;
+
+	&::placeholder {
+		font-size: 15px;
+	}
+
+	&.full {
+		width: 100%;
+	}
+
+	&:focus {
+		color: black;
+	}
+
+	& + & {
+		margin-top: 1rem;
+	}
+}

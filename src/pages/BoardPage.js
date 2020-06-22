@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import Api from './Api/Api';
-import {Board} from './Board';
+import '../App.css';
+import Api from '../Api/Api';
+import {Board} from '../Board';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import { Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import { Link } from 'react-router-dom';
 
-
-function App() {
+const BoardPage = () => {
   const [boardList, setBoardList] = useState([]);
   const [chatMessage, setChatMessage] = useState('');
   const [chatCollege, setChatCollege] = useState('');
@@ -43,6 +41,8 @@ function App() {
   // 글 작성
   const postBoard = (college, text) => {
     api.postBoard(college, text);
+    loadBoardList();
+    setChatMessage('');
   }
 
   return (
@@ -72,6 +72,12 @@ function App() {
               <Button onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
                 응원하기
               </Button>
+              <Link className="auth-button" to="/register">
+								register
+							</Link>
+              <Link className="auth-button" to="/login">
+								login
+							</Link>
               <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>
             </form>
           </div>
@@ -95,4 +101,4 @@ function App() {
   );
 }
 
-export default App;
+export default BoardPage;

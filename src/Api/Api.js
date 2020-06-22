@@ -52,8 +52,10 @@ export default class Api {
       var errorMessage = error.message;
       // ...
       console.log(errorCode, errorMessage);
-      this.changeUserStatus();
-    });
+      return(errorCode)
+    }).then(()=>{
+      this.getUserStatus();
+      return true});
   }
 
   //이메일로 회원가입
@@ -79,7 +81,9 @@ export default class Api {
           localStorage.setItem('userName', userName);
           localStorage.setItem('userEmail', userEmail);
         }
+        return userName;
       } else {
+        return null;
       }
     });
   }

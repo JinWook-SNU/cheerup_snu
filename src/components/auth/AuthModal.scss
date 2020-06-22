@@ -1,0 +1,21 @@
+.title {
+	font-size: 1.6rem;
+	margin-bottom: 30px;
+	color: #2f2e2c;
+}
+
+.auth-modal {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	padding: 20px 0;
+}
+
+.auth-button {
+	color: #6f6e6c;
+	font-size: 14px;
+	margin-top: 30px;
+	align-self: flex-end;
+}

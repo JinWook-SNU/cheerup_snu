@@ -15,6 +15,7 @@ import Api from '../../Api/Api'
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -51,20 +52,17 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
 	const classes = useStyles();
 	const api = new Api();
+	const [userName, setUserName] = useState(false);
 	const [userEmail, setUserEmail] = useState('');
 	const [userPassword, setUserPassword] = useState('');
 
 
-	const signInWithEmail = () => {
-		api.signInWithEmail(userEmail, userPassword);
-		const userName = api.getUserStatus();
-		console.log(userName);
-		if (userName) {
-			return (<Redirect to='/' />)
-		} else {
-				alert('로그인 실패')
-				return (<Redirect to='/regist' />)
-			}
+	const signInWithEmail = async () => {
+		await api.signInWithEmail(userEmail, userPassword);
+		return <Redirect to='/'/>
+		// await api.getUserStatus().then((res)=>{
+		// 	setUserName(res);
+		// })
 		// console.log(isLogin);
 		// if (isLogin) {
 		// 	return (<Redirect to='/' />)

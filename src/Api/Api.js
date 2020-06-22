@@ -52,6 +52,7 @@ export default class Api {
       var errorMessage = error.message;
       // ...
       console.log(errorCode, errorMessage);
+      alert('아이디 혹은 비밀번호가 틀렸습니다.')
       return(errorCode)
     }).then(()=>{
       this.getUserStatus();
@@ -64,6 +65,7 @@ export default class Api {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorCode, errorMessage)
+      alert(errorMessage)
     });
   }
 
@@ -96,7 +98,23 @@ export default class Api {
     localStorage.clear();
   }
 
+  //인증메일 전송
+  sendEmailVerification() {
+    firebase.auth().currentUser.sendEmailVerification().then(function() {
+      alert('서울대학교 이메일을 확인해주세요!');
+    });
+  }
 
+  //유저 이름 변경
+  changeUserName(userName) {
+    var user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName: userName,
+    }).then(function() {
+    }).catch(function(error) {
+      console.log(error)
+    });
+  }
 
   postBoard(College,text) {
     var newPostKey = firebase.database().ref().child('posts').push().key;

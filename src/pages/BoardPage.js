@@ -19,11 +19,12 @@ const BoardPage = ({history}) => {
   const [isLogin, setIsLogin] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const api = new Api();
+  const [userEmail, setUserEmail] = useState('');
 
   // 응원글 reload
   const loadBoardList = async() => {
     // api.loadBoardList()
-
+    setUserEmail(localStorage.getItem('userEmail'));
     await api.loadBoardList().then((res) => {
       // for (let i=0; i<res.length; i++){
       //   const timestamp = res[i].date;
@@ -108,7 +109,7 @@ const BoardPage = ({history}) => {
             <p style={{textAlign:"left"}}>※ <strong>단과대</strong>를 고르면 응원하기 버튼이 활성화 됩니다.</p>
           </div>
           <div>
-            { (boardList) ? boardList.map((board) => <Board board={board} key={board.Key}/>) : <div>게시글없음.</div>}
+            { (boardList) ? boardList.map((board) => <Board userEmail={userEmail} board={board} key={board.Key}/>) : <div>게시글없음.</div>}
           </div>
         </div>
     </div>

@@ -93,7 +93,6 @@ export default class Api {
       displayName: userName,
     }).then(function() {
       localStorage.setItem('userName',userName)
-      alert(userName)
     }).catch(function(error) {
       console.log(error)
     });

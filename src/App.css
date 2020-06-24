@@ -29,10 +29,14 @@
 }
 
 .linkButton {
-  background-color: red;
+  background-color:#4050B5;
+  color: white;
+  text-decoration: none;
   width: 60px;
   height: 60px;
   margin-right: 10px;
+  border-radius: 10%;
+  padding: 10px;
 }
 
 @keyframes App-logo-spin {

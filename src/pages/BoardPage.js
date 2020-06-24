@@ -51,6 +51,14 @@ const BoardPage = ({history}) => {
   return (
     <div className="App">
         <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '700px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
+          {!isLogin ? <div style={{marginTop: '15px'}}>
+            <Link className="linkButton" to="/register">
+            register
+          </Link>
+          <Link className="linkButton" to="/login">
+            로그인
+          </Link>
+          </div> : <div>{userName}님</div>}
           <div style={{marginTop : '15px', marginBottom: '10px'}}>
             <form>
               <textarea id="message-box" type="text" placeholder="응원글을 적고, 단과대를 선택해주세요!" value={chatMessage} onChange={e => setChatMessage(e.target.value)}>{chatMessage}</textarea>
@@ -76,19 +84,9 @@ const BoardPage = ({history}) => {
                   <MenuItem value={"사범대"}>사범대</MenuItem>
                 </Select>
               </FormControl>
-              <Button disabled={!chatCollege | chatMessage.indexOf("응원") === -1} style={{marginRight: "110px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
+              <Button disabled={!chatCollege | chatMessage.indexOf("응원") === -1} style={{marginRight: "10px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
                 응원하기
               </Button>
-              {!isLogin ? <div>
-                <Link className="linkButton" to="/register">
-								register
-							</Link>
-              <Link className="linkButton" to="/login">
-								로그인
-							</Link>
-              </div> : <div>{userName}님</div>}
-
-              <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>
             </form>
           </div>
           <div style={{marginBottom: "5px",borderTop : "2px solid black", borderBottom : "1px solid black", backgroundColor:"#94B1CE"}}>

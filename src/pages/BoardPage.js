@@ -4,7 +4,9 @@ import Api from '../Api/Api';
 import {Board} from '../Board';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
 import Icon from '@material-ui/core/Icon';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -51,34 +53,37 @@ const BoardPage = () => {
           <div style={{marginTop : '15px', marginBottom: '10px'}}>
             <form>
               <textarea id="message-box" type="text" placeholder="응원글을 적어주세요!" value={chatMessage} onChange={e => setChatMessage(e.target.value)}>{chatMessage}</textarea>
-              <Select
-                value={chatCollege}
-                onChange={handleSelectCollege}
-                style={{width:100}}
-              >
-                <MenuItem value={"경영대"}>경영대</MenuItem>
-                <MenuItem value={"인문대"}>인문대</MenuItem>
-                <MenuItem value={"사회대"}>사회대</MenuItem>
-                <MenuItem value={"자연대"}>자연대</MenuItem>
-                <MenuItem value={"공과대"}>공과대</MenuItem>
-                <MenuItem value={"농생대"}>농생대</MenuItem>
-                <MenuItem value={"생활대"}>생활대</MenuItem>
-                <MenuItem value={"음미대"}>음미대</MenuItem>
-                <MenuItem value={"수의대"}>수의대</MenuItem>
-                <MenuItem value={"약학대"}>약학대</MenuItem>
-                <MenuItem value={"의대"}>의대</MenuItem>
-                <MenuItem value={"사범대"}>사범대</MenuItem>
-              </Select>
-              <Button onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
+              <FormControl>
+                <InputLabel>단과대</InputLabel>
+                <Select
+                  value={chatCollege}
+                  onChange={handleSelectCollege}
+                  inputProps={{name: '단과대'}}
+                  style={{width:100, marginRight: "10px"}}
+                >
+                  <MenuItem value={"경영대"}>경영대</MenuItem>
+                  <MenuItem value={"인문대"}>인문대</MenuItem>
+                  <MenuItem value={"사회대"}>사회대</MenuItem>
+                  <MenuItem value={"자연대"}>자연대</MenuItem>
+                  <MenuItem value={"공과대"}>공과대</MenuItem>
+                  <MenuItem value={"농생대"}>농생대</MenuItem>
+                  <MenuItem value={"생활대"}>생활대</MenuItem>
+                  <MenuItem value={"음미대"}>음미대</MenuItem>
+                  <MenuItem value={"수의대"}>수의대</MenuItem>
+                  <MenuItem value={"약학대"}>약학대</MenuItem>
+                  <MenuItem value={"의대"}>의대</MenuItem>
+                  <MenuItem value={"사범대"}>사범대</MenuItem>
+                </Select>
+              </FormControl>
+              <Button style={{marginRight: "110px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
                 응원하기
               </Button>
               <Link className="linkButton" to="/register">
-								register
+								회원가입
 							</Link>
               <Link className="linkButton" to="/login">
-								login
+								로그인
 							</Link>
-              <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>
             </form>
           </div>
           <div>

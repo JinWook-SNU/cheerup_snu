@@ -52,22 +52,26 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Register() {
+export default function Register({history}) {
 	const classes = useStyles();
   const api = new Api();
 	const [userName, setUserName] = useState('');
 	const [userEmail, setUserEmail] = useState('');
-	const [userPassword, setUserPassword] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [disabledInput, setDisabledInput] = useState(false);
 
 
 	const signUp = async (name, email, password) => {
 		const fullEmail = email+'@snu.ac.kr'
-		// api.signUpWithEmail(fullEmail,password)
-    await api.signUpWithEmail(fullEmail, password);
-    // const step2 = await api.signInWithEmail(fullEmail, password);
-    // const step4 = await api.sendEmailVerification();
-    // const step5 = await api.getUserStatus();
-
+    setDisabledInput(true);
+    
+    await api.signUpWithEmail(fullEmail, password).then(()=>{
+      setTimeout(()=>{api.signInWithEmail(fullEmail, password)},1000);
+    }).then(()=>{
+      setTimeout(()=>{api.sendEmailVerification()},2000);
+    }).then(()=>{
+      setTimeout(()=>{api.changeUserName(name)},2000);
+    })
 	}
 
 
@@ -86,9 +90,11 @@ export default function Register() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                disabled={disabledInput}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
+                className="registInput"
                 required
                 fullWidth
                 id="firstName"
@@ -100,10 +106,12 @@ export default function Register() {
             </Grid>
 							<Grid item xs={8}>
 								<TextField
+                  disabled={disabledInput}
 									variant="outlined"
 									required
 									fullWidth
-									id="email"
+                  id="email"
+                  className="registInput"
 									label="Email Address"
 									name="email"
 									autoComplete="email"
@@ -116,7 +124,9 @@ export default function Register() {
 							</Grid>
             <Grid item xs={12}>
               <TextField
+                disabled={disabledInput}
                 variant="outlined"
+                className="registInput"
                 required
                 fullWidth
                 name="password"
@@ -136,6 +146,7 @@ export default function Register() {
             </Grid>
           </Grid>
           <Button
+            disabled={disabledInput}
             type="submit"
             fullWidth
             variant="contained"

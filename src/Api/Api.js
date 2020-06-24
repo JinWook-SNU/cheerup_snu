@@ -198,7 +198,7 @@ export default class Api {
   }
 
   async deletBoard(key) {
-    firebase.database().ref('users/' + key).remove();
+    firebase.database().ref('board/' + key).remove();
   }
 }
 

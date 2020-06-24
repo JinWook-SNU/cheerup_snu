@@ -10,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Icon from '@material-ui/core/Icon';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import heart from './empty_heart.png';
 
 const BoardPage = ({history}) => {
   const [boardList, setBoardList] = useState([]);
@@ -110,6 +111,12 @@ const BoardPage = ({history}) => {
           </div>
           <div>
             { (boardList) ? boardList.map((board) => <Board userEmail={userEmail} board={board} key={board.Key}/>) : <div>게시글없음.</div>}
+          </div>
+        </div>
+        <div id = "heart" style = {{position : "absolute", bottom : '213px', left : "850px"}}>
+          <img src = {heart} alt = "empty-heart"/>
+          <div>
+            <h2 id = "percentnumber" style = {{position : "absolute",width : "425px", textAlign : "center"}}>//percent//%</h2>
           </div>
         </div>
     </div>

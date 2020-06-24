@@ -92,6 +92,7 @@ export default class Api {
     user.updateProfile({
       displayName: userName,
     }).then(function() {
+      localStorage.setItem('userName',userName)
       alert(userName)
     }).catch(function(error) {
       console.log(error)
@@ -195,4 +196,9 @@ export default class Api {
       return (rows);
   })
   }
+
+  async deletBoard(key) {
+    firebase.database().ref('users/' + key).remove();
+  }
 }
+

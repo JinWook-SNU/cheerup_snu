@@ -60,7 +60,6 @@ export default function Register({history}) {
   const [userPassword, setUserPassword] = useState('');
   const [disabledInput, setDisabledInput] = useState(false);
 
-
 	const signUp = async (name, email, password) => {
 		const fullEmail = email+'@snu.ac.kr'
     setDisabledInput(true);

@@ -69,6 +69,8 @@ export default function EmailVerification({history}) {
 
   const signInFinish = () => {
     localStorage.setItem('verified', true);
+
+    
     history.push('/')
     api.postEmailVerification(localStorage.getItem('userEmail'));
   }

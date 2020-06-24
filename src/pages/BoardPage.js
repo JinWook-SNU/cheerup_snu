@@ -59,9 +59,17 @@ const BoardPage = ({history}) => {
   return (
     <div className="App">
         <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '700px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
+          {!isLogin ? <div style={{marginTop: '15px'}}>
+            <Link className="linkButton" to="/register">
+            register
+          </Link>
+          <Link className="linkButton" to="/login">
+            로그인
+          </Link>
+          </div> : <div>{userName}님</div>}
           <div style={{marginTop : '15px', marginBottom: '10px'}}>
             <div>
-              <textarea id="message-box" type="text" placeholder="응원글을 적어주세요!" value={chatMessage} onChange={e => setChatMessage(e.target.value)}>{chatMessage}</textarea>
+              <textarea id="message-box" type="text" placeholder="응원글을 적고, 단과대를 선택해주세요!" value={chatMessage} onChange={e => setChatMessage(e.target.value)}>{chatMessage}</textarea>
               <FormControl>
                 <InputLabel>단과대</InputLabel>
                 <Select
@@ -84,7 +92,7 @@ const BoardPage = ({history}) => {
                   <MenuItem value={"사범대"}>사범대</MenuItem>
                 </Select>
               </FormControl>
-              <Button style={{marginRight: "110px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
+              <Button disabled={!chatCollege | chatMessage.indexOf("응원") === -1} style={{marginRight: "10px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
                 응원하기
               </Button>
               {!isLogin ? <div>
@@ -104,6 +112,10 @@ const BoardPage = ({history}) => {
               </div>
               }
             </div>
+          </div>
+          <div style={{marginBottom: "5px",borderTop : "2px solid black", borderBottom : "1px solid black", backgroundColor:"#94B1CE"}}>
+            <p style={{textAlign:"left"}}>※ 글에 반드시 <strong>응원</strong>이라는 단어가 들어가야 글을 작성할 수 있습니다.<br></br></p>
+            <p style={{textAlign:"left"}}>※ <strong>단과대</strong>를 고르면 응원하기 버튼이 활성화 됩니다.</p>
           </div>
           <div>
             { (boardList) ? boardList.map((board) => <Board board={board} key={board.Key}/>) : <div>게시글없음.</div>}

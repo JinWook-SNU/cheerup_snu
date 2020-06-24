@@ -11,11 +11,12 @@ import Icon from '@material-ui/core/Icon';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const BoardPage = () => {
+const BoardPage = ({history}) => {
   const [boardList, setBoardList] = useState([]);
   const [chatMessage, setChatMessage] = useState('');
   const [chatCollege, setChatCollege] = useState('');
   const [userName, setUserName] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
   const api = new Api();
 
 
@@ -78,12 +79,16 @@ const BoardPage = () => {
               <Button disabled={!chatCollege | chatMessage.indexOf("응원") === -1} style={{marginRight: "110px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
                 응원하기
               </Button>
-              <Link className="linkButton" to="/register">
-								회원가입
+              {!isLogin ? <div>
+                <Link className="linkButton" to="/register">
+								register
 							</Link>
               <Link className="linkButton" to="/login">
 								로그인
 							</Link>
+              </div> : <div>{userName}님</div>}
+
+              <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>
             </form>
           </div>
           <div style={{marginBottom: "5px",borderTop : "2px solid black", borderBottom : "1px solid black", backgroundColor:"#94B1CE"}}>

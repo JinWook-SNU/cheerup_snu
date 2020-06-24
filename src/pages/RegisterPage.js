@@ -4,7 +4,7 @@ import Register from '../containers/auth/Register';
 
 class RegisterPage extends Component {
 	render() {
-		return <Register />;
+		return <Register history={this.props.history}/>;
 	}
 }
 

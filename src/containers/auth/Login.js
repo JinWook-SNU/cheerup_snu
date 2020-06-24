@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login({history}) {
   const api = new Api();
 	const classes = useStyles();
 	const [userName, setUserName] = useState(false);
@@ -58,8 +58,12 @@ export default function Login() {
 
 
 	const signInWithEmail = async (email, password) => {
-		api.signInWithEmail(email, password);
-		return <Redirect to='/'/>
+    await api.signInWithEmail(email, password).then(()=>{
+      setTimeout(()=>{
+        if(localStorage.getItem('userEmail')) history.push('/');
+      },1000);
+    })
+		
 		// await api.getUserStatus().then((res)=>{
 		// 	setUserName(res);
 		// })

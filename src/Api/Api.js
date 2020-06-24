@@ -36,6 +36,8 @@ export default class Api {
   async signInWithEmail(email, password){
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function(){
+      localStorage.setItem('userEmail', email);
+      return(true)
     })
     .catch(function(error) {
       var errorCode = error.code;
@@ -43,7 +45,7 @@ export default class Api {
       // ...
       console.log(errorCode, errorMessage);
       alert('아이디 혹은 비밀번호가 틀렸습니다.')
-      return(errorCode)
+      return(false)
     })
   }
 
@@ -56,6 +58,19 @@ export default class Api {
         console.log({emailVerified: user.emailVerified})
       })
     });
+  }
+
+  postEmailVerification(email) {
+    //15개 단과대
+    var newPostKey = firebase.database().ref().child('posts').push().key;
+    var postData = {
+      "Key": newPostKey,
+      "Email" : email,
+      "verified": true
+    };
+    var updates = {};
+    updates['/emailVerified/' + newPostKey] = postData;
+    firebase.database().ref().update(updates);
   }
 
   //4. 유저 이름 변경 (글쓰기에 뜨는 이름 설정)

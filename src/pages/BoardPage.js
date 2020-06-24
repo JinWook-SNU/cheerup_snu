@@ -22,17 +22,22 @@ const BoardPage = ({history}) => {
   const api = new Api();
   const [userEmail, setUserEmail] = useState('');
   const [userStayTime, setUserStayTime] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
   // 응원글 reload
   const loadBoardList = async() => {
     // api.loadBoardList()
-    if(!userStayTime) {
-      let count = userStayTime;
-      setInterval(()=> {
-        setUserStayTime(count+1);
-        console.log(userStayTime);
-      }, 1000);
-    }
+    // let count = 0;
+    // if(!count) {
+    //   setInterval(()=> {
+    //     count++;
+    //     console.log(count);
+        
+    //   }, 2000);
+    //   setUserStayTime(count);
+    //   console.log(userStayTime)
+    // }
+    
     setUserEmail(localStorage.getItem('userEmail'));
     await api.loadBoardList().then((res) => {
       // for (let i=0; i<res.length; i++){
@@ -54,10 +59,17 @@ const BoardPage = ({history}) => {
   }
 
   useEffect(() => {
-    console.log(userStayTime);
     loadBoardList();
     setIsLogin(localStorage.getItem('verified'))
     setUserName(localStorage.getItem('userName'))
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(seconds => seconds + 1);
+      loadBoardList();
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   // 글 작성
@@ -69,7 +81,6 @@ const BoardPage = ({history}) => {
 
   return (
     <div className="App">
-      
         <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '700px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
           {!isLogin ? <div style={{marginTop: '15px'}}>
             <Link className="linkButton" to="/register">

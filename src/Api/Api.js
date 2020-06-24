@@ -36,8 +36,6 @@ export default class Api {
   async signInWithEmail(email, password){
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function(){
-      this.getUserStatus();
-      return true
     })
     .catch(function(error) {
       var errorCode = error.code;
@@ -53,10 +51,14 @@ export default class Api {
   sendEmailVerification() {
     firebase.auth().currentUser.sendEmailVerification().then(function() {
       alert('서울대학교 이메일을 확인해주세요!');
+      const user = firebase.auth().currentUser;
+      user.reload().then(() => {
+        console.log({emailVerified: user.emailVerified})
+      })
     });
   }
 
-  //3. 유저 이름 변경 (글쓰기에 뜨는 이름 설정)
+  //4. 유저 이름 변경 (글쓰기에 뜨는 이름 설정)
   changeUserName(userName) {
     var user = firebase.auth().currentUser;
     user.updateProfile({
@@ -68,29 +70,64 @@ export default class Api {
     });
   }
 
+  signInWithEmailLink(email) {
+    var actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be whitelisted in the Firebase Console.
+      url: 'http://localhost:3000/',
+      // This must be true.
+      handleCodeInApp: true,
+      iOS: {
+        bundleId: 'http://localhost:3000/'
+      },
+      android: {
+        packageName: 'http://localhost:3000/',
+        installApp: true,
+        minimumVersion: '12'
+      },
+      dynamicLinkDomain: 'http://localhost:3000/'
+    };
+
+    firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+  .then(function() {
+    window.localStorage.setItem('emailForSignIn', email);
+  })
+  .catch(function(error) {
+    console.log(error)
+  });
+  }
+
   //5. 로그인 - 유저 정보 가져오기 + 로컬에 정보 저장/ 이 단계 이후로 글쓰기 가능!
   async getUserStatus() {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        var userName = user.displayName;
-        var userEmail = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        console.log(emailVerified);
-        console.log(userName);
-        console.log(userEmail);
-        if(userName&&userEmail) {
-          localStorage.setItem('userName', userName);
-          localStorage.setItem('userEmail', userEmail);
+    if(firebase.auth().currentUser){
+      const user = firebase.auth().currentUser;
+      user.reload().then(() => {
+        console.log({emailVerified: user.emailVerified})
+      })
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          var userName = user.displayName;
+          var userEmail = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+          console.log(emailVerified);
+          console.log(userName);
+          console.log(userEmail);
+          if(userName&&userEmail) {
+            localStorage.setItem('userName', userName);
+            localStorage.setItem('userEmail', userEmail);
+          }
+          return userName;
+        } else {
+          return null;
         }
-        return userName;
-      } else {
-        return null;
-      }
     });
+  }else{
+    console.log('not logined')
+  }
   }
 
   //로그아웃 함수

@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+.linkButton {
+  background-color: red;
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -75,3 +82,4 @@
   right: 0;
   font-size: 6px;
 }
+

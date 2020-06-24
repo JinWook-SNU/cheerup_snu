@@ -57,8 +57,8 @@ export default function Login() {
 	const [userPassword, setUserPassword] = useState('');
 
 
-	const signInWithEmail = async () => {
-		await api.signInWithEmail(userEmail, userPassword);
+	const signInWithEmail = async (email, password) => {
+		api.signInWithEmail(email, password);
 		return <Redirect to='/'/>
 		// await api.getUserStatus().then((res)=>{
 		// 	setUserName(res);
@@ -81,7 +81,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <div className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -119,7 +119,7 @@ export default function Login() {
             color="primary"
 						className={classes.submit}
 						onClick={()=>{
-							signInWithEmail();
+							signInWithEmail(userEmail, userPassword);
 						}}
           >
             Sign In
@@ -137,7 +137,7 @@ export default function Login() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </div>
       </div>
       <Box mt={8}>
         <Copyright />

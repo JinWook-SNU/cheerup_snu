@@ -72,10 +72,10 @@ const BoardPage = () => {
               <Button onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
                 응원하기
               </Button>
-              <Link className="auth-button" to="/register">
+              <Link className="linkButton" to="/register">
 								register
 							</Link>
-              <Link className="auth-button" to="/login">
+              <Link className="linkButton" to="/login">
 								login
 							</Link>
               <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>

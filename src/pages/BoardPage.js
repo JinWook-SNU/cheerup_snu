@@ -69,8 +69,10 @@ const BoardPage = ({history}) => {
     setChatMessage('');
   }
 
+
   return (
     <div className="App">
+        <div></div>
         <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '700px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
           {!isLogin ? <div style={{marginTop: '15px'}}>
             <Link className="linkButton" to="/register">
@@ -124,12 +126,7 @@ const BoardPage = ({history}) => {
             { (boardList) ? boardList.map((board) => <Board userEmail={userEmail} board={board} key={board.Key}/>) : <div>게시글없음.</div>}
           </div>
         </div>
-        <div id = "heart" style = {{position : "absolute", bottom : '213px', left : "850px"}}>
-          <img src = {heart} alt = "empty-heart"/>
-          <div>
-            <h2 id = "percentnumber" style = {{position : "absolute",width : "425px", textAlign : "center"}}>//percent//%</h2>
-          </div>
-        </div>
+
     </div>
   );
 }

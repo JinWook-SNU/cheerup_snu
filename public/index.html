@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="./progress.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -28,6 +29,28 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script src="./js-fluid-meter.js"></script>
+    <div id="topBar">
+    </div>
+    <div class="container">
+      <div class="row">
+        <div>
+          <div id="first" class="collegeTitle">경영대</div>
+          <div id="second" class="collegeTitle">경영대</div>
+          <div id="third" class="collegeTitle">경영대</div>
+        </div>
+        <div class="col text-center">
+          <div id="fluid-meter" class="mx-auto"></div>
+        </div>
+        <div class="col text-center">
+          <div id="fluid-meter-2"></div>
+        </div>
+        <div class="col text-center">
+          <div id="fluid-meter-3"></div>
+        </div>
+      </div>
+    </div>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -39,6 +62,121 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    
+
+
+
+
+
+    <script>
+      var fm = new FluidMeter();
+      fm.init({
+        targetContainer: document.getElementById("fluid-meter"),
+        fillPercentage: 14,
+        options: {
+          fontFamily: "Oxygen",
+          drawPercentageSign: true,
+          drawBubbles: true,
+          size: 300,
+          borderWidth: 10,
+          backgroundColor: "#262626",
+          foregroundColor: "#4C4A4A",
+          foregroundFluidLayer: {
+            fillStyle: "#ff69b4",
+            angularSpeed: 90,
+            maxAmplitude: 11,
+            frequency: 25,
+            horizontalSpeed: -200
+          },
+          backgroundFluidLayer: {
+            fillStyle: "pink",
+            angularSpeed: 100,
+            maxAmplitude: 9,
+            frequency: 30,
+            horizontalSpeed: 150
+          }
+        }
+      });
+  
+      var fm2 = new FluidMeter();
+      fm2.init({
+        targetContainer: document.getElementById("fluid-meter-2"),
+        fillPercentage: 80,
+        options: {
+          fontFamily: "Oxygen",
+          drawPercentageSign: true,
+          drawBubbles: true,
+          size: 300,
+          borderWidth: 10,
+          backgroundColor: "#262626",
+          foregroundColor: "#4C4A4A",
+          foregroundFluidLayer: {
+            fillStyle: "#ff69b4",
+            angularSpeed: 90,
+            maxAmplitude: 11,
+            frequency: 25,
+            horizontalSpeed: -200
+          },
+          backgroundFluidLayer: {
+            fillStyle: "pink",
+            angularSpeed: 100,
+            maxAmplitude: 13,
+            frequency: 23,
+            horizontalSpeed: 230
+          }
+        }
+      });
+  
+      var fm3 = new FluidMeter();
+      fm3.init({
+        targetContainer: document.getElementById("fluid-meter-3"),
+        fillPercentage: 45,
+        options: {
+          fontFamily: "Oxygen",
+          drawPercentageSign: true,
+          drawBubbles: true,
+          size: 300,
+          borderWidth: 10,
+          backgroundColor: "#262626",
+          foregroundColor: "#4C4A4A",
+          foregroundFluidLayer: {
+            fillStyle: "#ff69b4",
+            angularSpeed: 90,
+            maxAmplitude: 11,
+            frequency: 25,
+            horizontalSpeed: -200
+          },
+          backgroundFluidLayer: {
+            fillStyle: "#pink",
+            angularSpeed: 100,
+            maxAmplitude: 3,
+            frequency: 22,
+            horizontalSpeed: 20
+          }
+        }
+      });
+  
+      window.onload = function () {
+        document.getElementById("submit-percentage-1").onclick = function () {
+          fm.setPercentage(Number(document.getElementById('percentage-1').value))
+        }
+        document.getElementById("submit-percentage-2").onclick = function () {
+          fm2.setPercentage(Number(document.getElementById('percentage-2').value))
+        }
+        document.getElementById("submit-percentage-3").onclick = function () {
+          fm3.setPercentage(Number(document.getElementById('percentage-3').value))
+        }
+      };
+    </script>
+
+
+
+
+
+
+
+
+
   </body>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="/__/firebase/7.15.1/firebase-app.js"></script>

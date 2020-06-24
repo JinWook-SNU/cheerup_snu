@@ -192,9 +192,32 @@ export default class Api {
           childData.date = dateFormat(childData.date,"yyyy-mm-dd");
           rows.unshift(childData);
       })
+
+
       return (rows);
   })
   }
+
+  async getTopThree() {
+    var rows = [];
+    return  firebase.database().ref('board').once('value')
+    .then((snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+          var childData = childSnapshot.val();
+          rows.unshift(childData.College);
+      })
+
+      const onlyCollege = rows.reduce((t, a) => {
+        t[a] = (t[a] || 0) + 1;
+        return t;
+      }, {})
+
+      return onlyCollege;
+  })
+  }
+
+
+
 
   async deletBoard(key) {
     firebase.database().ref('board/' + key).remove();

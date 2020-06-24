@@ -67,8 +67,9 @@
 
 
 
-
+    <script src="./topThreeCollege"></script>
     <script>
+      
       var fm = new FluidMeter();
       fm.init({
         targetContainer: document.getElementById("fluid-meter"),
@@ -155,8 +156,17 @@
           }
         }
       });
-  
+      // var topThree = topThreeCollege();
       window.onload = function () {
+        
+        setInterval(()=>{
+          fm.setPercentage(40);
+          fm2.setPercentage(40);
+          fm3.setPercentage(40);
+          console.log('올라라')
+          // console.log(topThree)
+          
+        },2000)
         document.getElementById("submit-percentage-1").onclick = function () {
           fm.setPercentage(Number(document.getElementById('percentage-1').value))
         }

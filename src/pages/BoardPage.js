@@ -73,7 +73,7 @@ const BoardPage = ({history}) => {
   return (
     <div className="App">
         <div></div>
-        <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '700px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
+        <div style={{ backgroundColor: '#B2C6D9', width: '100%', height: '800px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
           {!isLogin ? <div style={{marginTop: '15px'}}>
             <Link className="linkButton" to="/register">
             register

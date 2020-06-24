@@ -362,114 +362,112 @@ function FluidMeter() {
 };
 
 
+// var fm = new FluidMeter();
+// fm.init({
+//   targetContainer: document.getElementById("fluid-meter"),
+//   fillPercentage: 15,
+//   options: {
+//     fontFamily: "Raleway",
+//     drawPercentageSign: false,
+//     drawBubbles: true,
+//     size: 300,
+//     borderWidth: 19,
+//     backgroundColor: "#e2e2e2",
+//     foregroundColor: "#fafafa",
+//     foregroundFluidLayer: {
+//       fillStyle: "purple",
+//       angularSpeed: 100,
+//       maxAmplitude: 12,
+//       frequency: 30,
+//       horizontalSpeed: -150
+//     },
+//     backgroundFluidLayer: {
+//       fillStyle: "pink",
+//       angularSpeed: 100,
+//       maxAmplitude: 9,
+//       frequency: 30,
+//       horizontalSpeed: 150
+//     }
+//   }
+// });
+
+// var fm2 = new FluidMeter();
+// fm2.init({
+//   targetContainer: document.getElementById("fluid-meter-2"),
+//   fillPercentage: 75,
+//   options: {
+//     fontFamily: "Oxygen",
+//     drawPercentageSign: true,
+//     drawBubbles: true,
+//     size: 300,
+//     borderWidth: 10,
+//     backgroundColor: "#262626",
+//     foregroundColor: "#4C4A4A",
+//     foregroundFluidLayer: {
+//       fillStyle: "#55DD10",
+//       angularSpeed: 90,
+//       maxAmplitude: 11,
+//       frequency: 25,
+//       horizontalSpeed: -200
+//     },
+//     backgroundFluidLayer: {
+//       fillStyle: "#CDDD10",
+//       angularSpeed: 100,
+//       maxAmplitude: 13,
+//       frequency: 23,
+//       horizontalSpeed: 230
+//     }
+//   }
+// });
+
+// var fm3 = new FluidMeter();
+// fm3.init({
+//   targetContainer: document.getElementById("fluid-meter-3"),
+//   fillPercentage: 45,
+//   options: {
+//     fontSize: "30px",
+//     drawPercentageSign: true,
+//     drawBubbles: false,
+//     size: 300,
+//     borderWidth: 19,
+//     backgroundColor: "#e2e2e2",
+//     foregroundColor: "#fafafa",
+//     foregroundFluidLayer: {
+//       fillStyle: "#16E1FF",
+//       angularSpeed: 30,
+//       maxAmplitude: 5,
+//       frequency: 30,
+//       horizontalSpeed: -20
+//     },
+//     backgroundFluidLayer: {
+//       fillStyle: "#4F8FC6",
+//       angularSpeed: 100,
+//       maxAmplitude: 3,
+//       frequency: 22,
+//       horizontalSpeed: 20
+//     }
+//   }
+// });
+
+// console.log('올라라')
 
 
+// const up = setInterval(()=>{
+//   fm.setPercentage(40);
+//   console.log('올라라')
+// },2000)
 
-
-
-
-
-
-
-
-var fm = new FluidMeter();
-fm.init({
-  targetContainer: document.getElementById("fluid-meter"),
-  fillPercentage: 15,
-  options: {
-    fontFamily: "Raleway",
-    drawPercentageSign: false,
-    drawBubbles: true,
-    size: 300,
-    borderWidth: 19,
-    backgroundColor: "#e2e2e2",
-    foregroundColor: "#fafafa",
-    foregroundFluidLayer: {
-      fillStyle: "purple",
-      angularSpeed: 100,
-      maxAmplitude: 12,
-      frequency: 30,
-      horizontalSpeed: -150
-    },
-    backgroundFluidLayer: {
-      fillStyle: "pink",
-      angularSpeed: 100,
-      maxAmplitude: 9,
-      frequency: 30,
-      horizontalSpeed: 150
-    }
-  }
-});
-
-var fm2 = new FluidMeter();
-fm2.init({
-  targetContainer: document.getElementById("fluid-meter-2"),
-  fillPercentage: 75,
-  options: {
-    fontFamily: "Oxygen",
-    drawPercentageSign: true,
-    drawBubbles: true,
-    size: 300,
-    borderWidth: 10,
-    backgroundColor: "#262626",
-    foregroundColor: "#4C4A4A",
-    foregroundFluidLayer: {
-      fillStyle: "#55DD10",
-      angularSpeed: 90,
-      maxAmplitude: 11,
-      frequency: 25,
-      horizontalSpeed: -200
-    },
-    backgroundFluidLayer: {
-      fillStyle: "#CDDD10",
-      angularSpeed: 100,
-      maxAmplitude: 13,
-      frequency: 23,
-      horizontalSpeed: 230
-    }
-  }
-});
-
-var fm3 = new FluidMeter();
-fm3.init({
-  targetContainer: document.getElementById("fluid-meter-3"),
-  fillPercentage: 45,
-  options: {
-    fontSize: "30px",
-    drawPercentageSign: true,
-    drawBubbles: false,
-    size: 300,
-    borderWidth: 19,
-    backgroundColor: "#e2e2e2",
-    foregroundColor: "#fafafa",
-    foregroundFluidLayer: {
-      fillStyle: "#16E1FF",
-      angularSpeed: 30,
-      maxAmplitude: 5,
-      frequency: 30,
-      horizontalSpeed: -20
-    },
-    backgroundFluidLayer: {
-      fillStyle: "#4F8FC6",
-      angularSpeed: 100,
-      maxAmplitude: 3,
-      frequency: 22,
-      horizontalSpeed: 20
-    }
-  }
-});
-
-window.onload = function() {
+// window.onload = function() {
   
-  document.getElementById("submit-percentage-1").onclick = function() { 
-    fm.setPercentage(Number(document.getElementById("percentage-1").value));
-  };
-  document.getElementById("submit-percentage-2").onclick = function() {
-    fm2.setPercentage(Number(document.getElementById("percentage-2").value));
-  };
-  document.getElementById("submit-percentage-3").onclick = function() {
-    fm3.setPercentage(Number(document.getElementById("percentage-3").value));
-  };
-};
 
+//   document.getElementById("submit-percentage-1").onclick = function() { 
+    
+//   };
+//   document.getElementById("submit-percentage-2").onclick = function() {
+//     fm2.setPercentage(Number(document.getElementById("percentage-2").value));
+//   };
+//   document.getElementById("submit-percentage-3").onclick = function() {
+//     fm3.setPercentage(Number(document.getElementById("percentage-3").value));
+//   };
+// };
 

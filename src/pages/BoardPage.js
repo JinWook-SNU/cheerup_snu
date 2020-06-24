@@ -26,18 +26,6 @@ const BoardPage = ({history}) => {
 
   // 응원글 reload
   const loadBoardList = async() => {
-    // api.loadBoardList()
-    // let count = 0;
-    // if(!count) {
-    //   setInterval(()=> {
-    //     count++;
-    //     console.log(count);
-        
-    //   }, 2000);
-    //   setUserStayTime(count);
-    //   console.log(userStayTime)
-    // }
-    
     setUserEmail(localStorage.getItem('userEmail'));
     await api.loadBoardList().then((res) => {
       // for (let i=0; i<res.length; i++){
@@ -68,6 +56,8 @@ const BoardPage = ({history}) => {
     const interval = setInterval(() => {
       setSeconds(seconds => seconds + 1);
       loadBoardList();
+      setIsLogin(localStorage.getItem('verified'))
+      setUserName(localStorage.getItem('userName'))
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -121,7 +111,7 @@ const BoardPage = ({history}) => {
                   <MenuItem value={"사범대"}>사범대</MenuItem>
                 </Select>
               </FormControl>
-              <Button disabled={!chatCollege | chatMessage.indexOf("응원") === -1} style={{marginRight: "10px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
+              <Button disabled={!chatCollege | chatMessage.indexOf("응원") === -1 | !isLogin | !userName} style={{marginRight: "10px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
                 응원하기
               </Button>
             </div>

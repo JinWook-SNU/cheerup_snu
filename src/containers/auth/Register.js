@@ -54,8 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
 	const classes = useStyles();
-	const api = new Api();
-
+  const api = new Api();
 	const [userName, setUserName] = useState('');
 	const [userEmail, setUserEmail] = useState('');
 	const [userPassword, setUserPassword] = useState('');
@@ -63,18 +62,12 @@ export default function Register() {
 
 	const signUp = async (name, email, password) => {
 		const fullEmail = email+'@snu.ac.kr'
-		api.signUpWithEmail('wlsdnr330@snu.ac.kr','123123')
-		alert(fullEmail)
+		// api.signUpWithEmail(fullEmail,password)
+    await api.signUpWithEmail(fullEmail, password);
+    // const step2 = await api.signInWithEmail(fullEmail, password);
+    // const step4 = await api.sendEmailVerification();
+    // const step5 = await api.getUserStatus();
 
-		api.signUpWithEmail(fullEmail, password).then(()=>{
-			api.signInWithEmail(fullEmail, password);
-		}).then(()=>{
-			api.changeUserName(name);
-		}).then(()=>{
-			api.sendEmailVerification();
-		}).then(()=>{
-			api.getUserStatus();
-		})
 	}
 
 
@@ -89,7 +82,7 @@ export default function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <div className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -150,7 +143,7 @@ export default function Register() {
 						className={classes.submit}
 						// onClick = {()=> {api.signUpWithEmail('wlsdnr330@snu.ac.kr','123123')}}
 						onClick = {()=>{ 
-							api.signUpWithEmail('wlsdnr330@snu.ac.kr','password');
+							signUp(userName, userEmail, userPassword);
 						}}
 						// onClick = {()=> {signUp(userName, userEmail, userPassword)}}
           >
@@ -163,7 +156,7 @@ export default function Register() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </div>
       </div>
       <Box mt={5}>
         <Copyright />

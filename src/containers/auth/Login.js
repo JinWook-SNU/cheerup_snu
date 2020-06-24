@@ -50,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+  const api = new Api();
 	const classes = useStyles();
-	const api = new Api();
 	const [userName, setUserName] = useState(false);
 	const [userEmail, setUserEmail] = useState('');
 	const [userPassword, setUserPassword] = useState('');

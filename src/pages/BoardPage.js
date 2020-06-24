@@ -87,6 +87,7 @@ const BoardPage = () => {
         </div>
         <div>
           <button onClick={loadBoardList}> loadBoardList! </button>
+          <button onClick={()=>{api.signInWithGoogle()}}> Sign in with Google </button>
           <button onClick={()=>{api.signInWithEmail('wlsdnr330@snu.ac.kr','password')}}> Sign in with Email </button>
           <button onClick={()=>{api.signUpWithEmail('wlsdnr330@snu.ac.kr','password')}}> Sign up with Email </button>
           <button onClick={()=>{api.getUserStatus()}}> User Status </button>

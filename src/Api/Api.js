@@ -16,20 +16,62 @@ export default class Api {
     localStorage.setItem('userEmail', userEmail);
   }
 
-  //구글로 로그인
-  signInWithGoogle() {
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.setCustomParameters({prompt:'select_account'});
-    const signInWithGoogle = () => auth.signInWithPopup(provider);
-    signInWithGoogle();
+  //--------------------------------------이메일로 회원가입하기
+  //1. firebase에 회원정보 등록
+  async signUpWithEmail(email, password) {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
+      // alert(email+' '+ password + ' ' + '111')
+      // this.signInWithEmail(email,password)
+      return true;
+    }).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode, errorMessage)
+      alert(errorMessage)
+      return false;
+    });
   }
-  
-  //유저 정보 가져오기
-  changeUserStatus() {
+
+  //2. 이메일로 로그인 (이후 회원정보 변경 가능)
+  async signInWithEmail(email, password){
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(function(){
+      this.getUserStatus();
+      return true
+    })
+    .catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+      console.log(errorCode, errorMessage);
+      alert('아이디 혹은 비밀번호가 틀렸습니다.')
+      return(errorCode)
+    })
+  }
+
+  //3. 인증메일 전송 (현재 로그인된 계정 verification을 true로 변경)
+  sendEmailVerification() {
+    firebase.auth().currentUser.sendEmailVerification().then(function() {
+      alert('서울대학교 이메일을 확인해주세요!');
+    });
+  }
+
+  //3. 유저 이름 변경 (글쓰기에 뜨는 이름 설정)
+  changeUserName(userName) {
+    var user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName: userName,
+    }).then(function() {
+      alert(userName)
+    }).catch(function(error) {
+      console.log(error)
+    });
+  }
+
+  //5. 로그인 - 유저 정보 가져오기 + 로컬에 정보 저장/ 이 단계 이후로 글쓰기 가능!
+  async getUserStatus() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        // User is signed in.
         var userName = user.displayName;
         var userEmail = user.email;
         var emailVerified = user.emailVerified;
@@ -37,45 +79,6 @@ export default class Api {
         var isAnonymous = user.isAnonymous;
         var uid = user.uid;
         var providerData = user.providerData;
-        // ...
-        console.log(emailVerified);
-        // this.localLogin(userName, userEmail)
-      } else {
-
-      }
-    });
-  }
-  //이메일로 로그인
-  signInWithEmail(email, password){
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-      console.log(errorCode, errorMessage);
-      alert('아이디 혹은 비밀번호가 틀렸습니다.')
-      return(errorCode)
-    }).then(()=>{
-      this.getUserStatus();
-      return true});
-  }
-
-  //이메일로 회원가입
-  signUpWithEmail(email, password) {
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode, errorMessage)
-      alert(errorMessage)
-    });
-  }
-
-  //5. 로그인 - 유저 정보 가져오기 + 로컬에 정보 저장/ 이 단계 이후로 글쓰기 가능!
-  getUserStatus() {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        var userName = user.displayName;
-        var userEmail = user.email;
-        var emailVerified = user.emailVerified;
         console.log(emailVerified);
         console.log(userName);
         console.log(userEmail);
@@ -98,24 +101,6 @@ export default class Api {
     localStorage.clear();
   }
 
-  //인증메일 전송
-  sendEmailVerification() {
-    firebase.auth().currentUser.sendEmailVerification().then(function() {
-      alert('서울대학교 이메일을 확인해주세요!');
-    });
-  }
-
-  //유저 이름 변경
-  changeUserName(userName) {
-    var user = firebase.auth().currentUser;
-    user.updateProfile({
-      displayName: userName,
-    }).then(function() {
-    }).catch(function(error) {
-      console.log(error)
-    });
-  }
-
   postBoard(College,text) {
     var newPostKey = firebase.database().ref().child('posts').push().key;
     //15개 단과대
@@ -133,7 +118,7 @@ export default class Api {
   }
 
   //메인 - 게시물 받아오기
-  loadBoardList() {
+  async loadBoardList() {
     var rows = [];
     return  firebase.database().ref('board').once('value')
     .then((snapshot) => {

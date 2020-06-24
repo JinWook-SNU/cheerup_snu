@@ -4,7 +4,7 @@
         <style>
             #heart{
                 position:absolute;
-                top : 50px;
+                bottom : 213px;
                 left : 0;
                 margin : 0;
             }
@@ -12,7 +12,7 @@
                 width : 425px;
                 position : absolute;
                 left : 0px;
-                bottom : 297px;
+                bottom : 217px;
             }
             #fill1{
                 width : 425px;
@@ -90,8 +90,14 @@
                 position : absolute;
                 width : 425px;
                 left : 0px;
-                top : 428px;
+                bottom : 167px;
                 text-align : center;
+            }
+            #select{
+                position : absolute;
+                width : 425px;
+                display : flex;
+                bottom : 110px;
             }
         </style>
     </head>
@@ -99,7 +105,10 @@
         <div id = "input">
             <form id = "form">
                 <input type="text" id = "percent"/>
-                <input type = "submit"/>
+                <input type = "submit" value = "set percentage"/>
+            </form>
+            <form id = "confirm">
+                <input type = "submit" value = "confirm and draw"/>
             </form>
         </div>
         <div id = "fills">
@@ -142,6 +151,20 @@
             <h2 id = 'percentnumber'>
 
             </h2>
+        </div>
+        <div id = "select">
+            <button id = "cba">경영대</button>
+            <button id = "hum">인문대</button>
+            <button id = "soc">사회대</button>
+            <button id = "sci">자연대</button>
+            <button id = "eng">공과대</button>
+            <button id = "cals">농생대</button>
+            <button id = "che">생활대</button>
+            <button id = "mus">음미대</button>
+            <button id = "vet">수의대</button>
+            <button id = "pha">약학대</button>
+            <button id = "med">의대</button>
+            <button id = "edu">사범대</button>
         </div>
         <script src="fillheart.js" type = "text/javascript"></script>
     </body>

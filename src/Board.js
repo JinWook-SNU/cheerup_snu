@@ -12,7 +12,10 @@ return (
         </div>
         <div id="content-box">
             <span>{board.text}</span>
-            <div id="date-box"><span>{board.date}</span>{userEmail === board.writerEmail ? <div><button onClick={()=>{api.deletBoard(board.Key)}}>삭제</button></div> : null}</div>
+            <div id="date-box">
+                {userEmail === board.writerEmail ? <div><button style={{border: "none", marginBottom: "1px"}} onClick={()=>{api.deletBoard(board.Key)}}>삭제</button></div> : null}
+                <span style={{marginRight:"2px", marginBottom: "2px"}}>{board.date}</span>
+            </div>
         </div>
     </div>)
 };

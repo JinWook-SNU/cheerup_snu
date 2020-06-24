@@ -10,7 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Icon from '@material-ui/core/Icon';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import heart from './empty_heart.png'
+import heart from './empty_heart.png';
 
 const BoardPage = ({history}) => {
   const [boardList, setBoardList] = useState([]);

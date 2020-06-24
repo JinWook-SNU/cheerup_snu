@@ -112,6 +112,12 @@ const BoardPage = ({history}) => {
             { (boardList) ? boardList.map((board) => <Board userEmail={userEmail} board={board} key={board.Key}/>) : <div>게시글없음.</div>}
           </div>
         </div>
+        <div id = "heart" style = {{position : "absolute", bottom : '213px', left : "850px"}}>
+          <img src = {heart} alt = "empty-heart"/>
+          <div>
+            <h2 id = "percentnumber" style = {{position : "absolute",width : "425px", textAlign : "center"}}>//percent//%</h2>
+          </div>
+        </div>
     </div>
   );
 }

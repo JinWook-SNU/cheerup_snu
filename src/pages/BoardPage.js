@@ -66,7 +66,13 @@ const BoardPage = ({history}) => {
           <Link className="linkButton" to="/login">
             로그인
           </Link>
-          </div> : <div>{userName}님</div>}
+          </div> :
+          <div>
+            <div>{userName}님</div>
+            <Button style={{marginRight: "110px"}} onClick={()=>{signOut()}} variant="contained" color="primary" disableElevation>
+              로그아웃
+            </Button>
+          </div>}
           <div style={{marginTop : '15px', marginBottom: '10px'}}>
             <div>
               <textarea id="message-box" type="text" placeholder="응원글을 적고, 단과대를 선택해주세요!" value={chatMessage} onChange={e => setChatMessage(e.target.value)}>{chatMessage}</textarea>
@@ -95,22 +101,6 @@ const BoardPage = ({history}) => {
               <Button disabled={!chatCollege | chatMessage.indexOf("응원") === -1} style={{marginRight: "10px"}} onClick={()=>{postBoard(chatCollege,chatMessage)}} variant="contained" color="primary" disableElevation>
                 응원하기
               </Button>
-              {!isLogin ? <div>
-                <Link className="linkButton" to="/register">
-								register
-							</Link>
-              <Link className="linkButton" to="/login">
-								로그인
-							</Link>
-              </div>
-              :
-              <div>
-                <div>{userName}님</div>
-                <Button style={{marginRight: "110px"}} onClick={()=>{signOut()}} variant="contained" color="primary" disableElevation>
-                  로그아웃
-                </Button>
-              </div>
-              }
             </div>
           </div>
           <div style={{marginBottom: "5px",borderTop : "2px solid black", borderBottom : "1px solid black", backgroundColor:"#94B1CE"}}>

@@ -17,8 +17,8 @@ const BoardPage = ({history}) => {
   const [chatCollege, setChatCollege] = useState('');
   const [userName, setUserName] = useState('');
   const [isLogin, setIsLogin] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const api = new Api();
-
 
   // 응원글 reload
   const loadBoardList = async() => {
@@ -36,9 +36,17 @@ const BoardPage = ({history}) => {
   const handleSelectCollege = (e) => {
     setChatCollege(e.target.value);
   };
-  
+
+  const signOut = () => {
+    api.signOut();
+    setIsLogin(false);
+    setIsValid(false);
+  }
+
   useEffect(() => {
     loadBoardList();
+    setIsLogin(localStorage.getItem('verified'))
+    setUserName(localStorage.getItem('userName'))
   }, []);
 
   // 글 작성
@@ -52,7 +60,7 @@ const BoardPage = ({history}) => {
     <div className="App">
         <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '700px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
           <div style={{marginTop : '15px', marginBottom: '10px'}}>
-            <form>
+            <div>
               <textarea id="message-box" type="text" placeholder="응원글을 적어주세요!" value={chatMessage} onChange={e => setChatMessage(e.target.value)}>{chatMessage}</textarea>
               <FormControl>
                 <InputLabel>단과대</InputLabel>
@@ -86,27 +94,20 @@ const BoardPage = ({history}) => {
               <Link className="linkButton" to="/login">
 								로그인
 							</Link>
-              </div> : <div>{userName}님</div>}
-
-              <button onClick={()=>{postBoard(chatCollege,chatMessage)}}>응원하기</button>
-            </form>
+              </div>
+              :
+              <div>
+                <div>{userName}님</div>
+                <Button style={{marginRight: "110px"}} onClick={()=>{signOut()}} variant="contained" color="primary" disableElevation>
+                  로그아웃
+                </Button>
+              </div>
+              }
+            </div>
           </div>
           <div>
             { (boardList) ? boardList.map((board) => <Board board={board} key={board.Key}/>) : <div>게시글없음.</div>}
           </div>
-        </div>
-        <div>
-          <button onClick={loadBoardList}> loadBoardList! </button>
-          <button onClick={()=>{api.signInWithGoogle()}}> Sign in with Google </button>
-          <button onClick={()=>{api.signInWithEmail('wlsdnr330@snu.ac.kr','password')}}> Sign in with Email </button>
-          <button onClick={()=>{api.signUpWithEmail('wlsdnr330@snu.ac.kr','password')}}> Sign up with Email </button>
-          <button onClick={()=>{api.getUserStatus()}}> User Status </button>
-          <button onClick={()=>{api.sendEmailVerification()}}> Send-Email </button>
-          <button onClick={()=>{api.signOut()}}> logout </button>
-          <form>
-            <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
-            <input type="submit" value="이름결정" onClick={()=>{api.changeUserName(userName)}} />
-          </form>
         </div>
     </div>
   );

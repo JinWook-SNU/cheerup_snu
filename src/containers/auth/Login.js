@@ -54,14 +54,31 @@ export default function Login({history}) {
 	const classes = useStyles();
 	const [userName, setUserName] = useState(false);
 	const [userEmail, setUserEmail] = useState('');
-	const [userPassword, setUserPassword] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [disabledInput, setDisabledInput] = useState(false);
 
+  const validationCheck = async() => {
+    await api.loadEmailVerification().then((res) => {
+      res.map((res)=>{
+        console.log(res)
+        if(res.Email===userEmail) localStorage.setItem('verified', true)
+      })
+    })
+  }
 
 	const signInWithEmail = async (email, password) => {
+    setDisabledInput(true);
     await api.signInWithEmail(email, password).then(()=>{
       setTimeout(()=>{
-        if(localStorage.getItem('userEmail')) history.push('/');
-      },1000);
+        if(localStorage.getItem('userEmail')) {
+          history.push('/');
+          validationCheck();
+          api.getUserStatus();
+        }else{
+          setDisabledInput(true);
+          alert('서버통신 시간을 초과하였습니다. 다시 시도해주세요.')
+        }
+      },2500);
     })
 		
 		// await api.getUserStatus().then((res)=>{
@@ -87,6 +104,7 @@ export default function Login({history}) {
         </Typography>
         <div className={classes.form} noValidate>
           <TextField
+            disabled={disabledInput}
             variant="outlined"
             margin="normal"
             required
@@ -100,6 +118,7 @@ export default function Login({history}) {
 						onChange={e => setUserEmail(e.target.value)}
           />
           <TextField
+            disabled={disabledInput}
             variant="outlined"
             margin="normal"
             required
@@ -117,6 +136,7 @@ export default function Login({history}) {
             label="Remember me"
           />
           <Button
+            disabled={disabledInput}
             // type="submit"
             fullWidth
             variant="contained"

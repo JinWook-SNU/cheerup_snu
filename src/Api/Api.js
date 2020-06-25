@@ -242,11 +242,3 @@ export default class Api {
   }
 }
 
-const api = new Api();
-
-export function getTopThreeE() {
-  api.getTopThree()
-  
-
-}
-

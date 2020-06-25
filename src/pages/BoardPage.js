@@ -15,6 +15,7 @@ import heart from './empty_heart.png';
 
 
 
+
 const BoardPage = ({history}) => {
   const [boardList, setBoardList] = useState([]);
   const [chatMessage, setChatMessage] = useState('');
@@ -201,9 +202,9 @@ const BoardPage = ({history}) => {
     const interval = setInterval(() => {
       setSeconds(seconds => seconds + 1);
       loadBoardList();
-     
-      setIsLogin(localStorage.getItem('verified'))
-      setUserName(localStorage.getItem('userName'))
+      setIsLogin(localStorage.getItem('verified'));
+      setUserName(localStorage.getItem('userName'));
+      
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -375,6 +376,7 @@ const BoardPage = ({history}) => {
     setprintedchats(educhats);
     setcurrentcollege('사범대');
   }
+
 
   return (
     <body>

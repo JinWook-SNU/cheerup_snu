@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -396,6 +397,17 @@ const BoardPage = ({history}) => {
           <div style={{marginTop : '15px', marginBottom: '10px'}}>
             <div>
               <textarea id="message-box" type="text" placeholder="응원글을 적고, 단과대를 선택해주세요!" value={chatMessage} onChange={e => setChatMessage(e.target.value)}>{chatMessage}</textarea>
+              <TextField
+                label="응원글"
+                variant="outlined"
+                multiline
+                rows={1}
+                color="primary"
+                placeholder="응원글을 적어주세요!"
+                value={chatMessage}
+                onChange={e => setChatMessage(e.target.value)}
+                style={{width: "300px", marginRight: "10px"}}
+              />
               <FormControl>
                 <InputLabel>단과대</InputLabel>
                 <Select

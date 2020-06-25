@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Api from '../Api/Api';
-// import {Board} from '../Board';
+import {Board} from '../Board';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -12,6 +12,10 @@ import Icon from '@material-ui/core/Icon';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import heart from './empty_heart.png';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 
 
 
@@ -27,20 +31,8 @@ const BoardPage = ({history}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userStayTime, setUserStayTime] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  let [cbachats, setcbachats] = useState(0);
-  let [humchats, sethumchats] = useState(0);
-  let [socchats, setsocchats] = useState(0);
-  let [scichats, setscichats] = useState(0);
-  let [engchats, setengchats] = useState(0);
-  let [calschats, setcalschats] = useState(0);
-  let [chechats, setchechats] = useState(0);
-  let [muschats, setmuschats] = useState(0);
-  let [vetchats, setvetchats] = useState(0);
-  let [phachats, setphachats] = useState(0);
-  let [medchats, setmedchats] = useState(0);
-  let [educhats, seteduchats] = useState(0);
-  let [printedchats, setprintedchats] = useState(0);
-  let [currentcollege, setcurrentcollege] = useState('경영대');
+  const [currentCollege, setCurrentCollege] = useState('경영대');
+  const [numOfChat,setNumOfChat] = useState(0)
 
   const Fill = ({percentage}) => {
     let height = (378*percentage)/100+'px';
@@ -52,135 +44,28 @@ const BoardPage = ({history}) => {
 
   };
 
-  const Board =({userEmail, board}) => {
-    const api = new Api();
-    const deleteBoard = () => {
-        api.deletBoard(board.Key);
-        if(board.College === "경영대")
-        {
-          setcbachats(cbachats => cbachats-1);
-          if(currentcollege === "경영대")
-          {
-            settocba();
-          }
-        }
-        if(board.College === "인문대")
-        {
-          sethumchats(humchats => humchats-1);
-          if(currentcollege === "인문대")
-          {
-            settohum();
-          }
-        }
-        if(board.College === "사회대")
-        {
-          setsocchats(socchats => socchats-1);
-          if(currentcollege === "사회대")
-          {
-            settosoc();
-          }
-        }
-        if(board.College === "자연대")
-        {
-          setscichats(scichats => scichats-1);
-          if(currentcollege === "자연대")
-          {
-            settosci();
-          }
-        }
-        if(board.College === "공과대")
-        {
-          setengchats(engchats => engchats-1);
-          if(currentcollege === "공과대")
-          {
-            settoeng();
-          }
-        }
-        if(board.College === "농생대")
-        {
-          setcalschats(calschats => calschats-1);
-          if(currentcollege === "농생대")
-          {
-            settocals();
-          }
-        }
-        if(board.College === "생활대")
-        {
-          setchechats(chechats => chechats-1);
-          if(currentcollege === "생활대")
-          {
-            settoche();
-          }
-        }
-        if(board.College === "음미대")
-        {
-          setmuschats(muschats => muschats-1);
-          if(currentcollege === "음미대")
-          {
-            settomus();
-          }
-        }
-        if(board.College === "수의대")
-        {
-          setvetchats(vetchats => vetchats-1);
-          if(currentcollege === "수의대")
-          {
-            settovet();
-          }
-        }
-        if(board.College === "약학대")
-        {
-          setmedchats(medchats => medchats-1);
-          if(currentcollege === "약학대")
-          {
-            settomed();
-          }
-        }
-        if(board.College === "의대")
-        {
-          setmedchats(medchats => medchats-1);
-          if(currentcollege === "의대")
-          {
-            settomed();
-          }
-        }
-        if(board.College === "사범대")
-        {
-          seteduchats(educhats => educhats-1);
-          if(currentcollege === "사범대")
-          {
-            settoedu();
-          }
-        }
-    }
-  
-  return (
-    <div id="box" style={{display: "flex"}}>
-        <div id="user-box">
-            <h5 style={{margin:"0"}}>{board.writerName}  ({board.College})</h5>
-        </div>
-        <div id="content-box">
-            <span>{board.text}</span>
-            <div id="date-box">
-                {userEmail === board.writerEmail ? <div><button style={{border: "none", marginBottom: "1px"}} onClick={()=>{deleteBoard()}}>삭제</button></div> : null}
-                <span style={{marginRight:"2px", marginBottom: "2px"}}>{board.date}</span>
-            </div>
-        </div>
-    </div>)
-  };
-
   // 응원글 reload
   const loadBoardList = async() => {
     setUserEmail(localStorage.getItem('userEmail'));
     await api.loadBoardList().then((res) => {
-      // for (let i=0; i<res.length; i++){
-      //   const timestamp = res[i].date;
-      //   res[i].date = timeConverter(timestamp);
-      // };
       setBoardList(res)
     });
-
   };
+
+
+  const loadChatNum = async(college) => {
+    await api.getTopThree().then((res)=>{
+      setNumOfChat(res[college]);
+      console.log(college);
+    })
+  }
+
+  const changeCurrentCollege = (college) => {
+    console.log(college);
+    setCurrentCollege(college)
+    console.log(currentCollege);
+    loadChatNum(currentCollege);
+  }
 
   const handleSelectCollege = (e) => {
     setChatCollege(e.target.value);
@@ -196,6 +81,7 @@ const BoardPage = ({history}) => {
     loadBoardList();
     setIsLogin(localStorage.getItem('verified'))
     setUserName(localStorage.getItem('userName'))
+    loadChatNum();
   }, []);
 
   useEffect(() => {
@@ -204,7 +90,6 @@ const BoardPage = ({history}) => {
       loadBoardList();
       setIsLogin(localStorage.getItem('verified'));
       setUserName(localStorage.getItem('userName'));
-      
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -213,171 +98,7 @@ const BoardPage = ({history}) => {
       // 글 작성
   const postBoard = (college, text) => {
     api.postBoard(college, text);
-    loadBoardList();
-    setcbachats(0);
-    sethumchats(0);
-    setsocchats(0);
-    setscichats(0);
-    setengchats(0);
-    setcalschats(0);
-    setmuschats(0);
-    setchechats(0);
-    setvetchats(0);
-    setphachats(0);
-    setmedchats(0);
-    seteduchats(0);
-    for(let i = 0;i<boardList.length;i++)
-    {
-      if(boardList[i].College==='경영대')
-      {
-        setcbachats(cbachats => cbachats+1);
-      }
-      else if(boardList[i].College==='인문대')
-      {
-        sethumchats(humchats => humchats +1);
-      }
-      else if(boardList[i].College==='사회대')
-      {
-        setsocchats(socchats => socchats + 1);
-      }
-      else if(boardList[i].College==='자연대')
-      {
-        setscichats(scichats => scichats + 1);
-      }
-      else if(boardList[i].College==='공과대')
-      {
-        setengchats(engchats => engchats + 1);
-      }
-      else if(boardList[i].College==='농생대')
-      {
-        setcalschats(calschats => calschats + 1);
-      }
-      else if(boardList[i].College==='생활대')
-      {
-        setchechats(chechats => chechats + 1);
-      }
-      else if(boardList[i].College==='음미대')
-      {
-        setmuschats(muschats => muschats + 1);
-      }
-      else if(boardList[i].College==='수의대')
-      {
-        setvetchats(vetchats => vetchats + 1);
-      }
-      else if(boardList[i].College==='약학대')
-      {
-        setphachats(phachats => phachats + 1);
-      }
-      else if(boardList[i].College==='의대')
-      {
-        setmedchats(medchats => medchats + 1);
-      }
-      else if(boardList[i].College==='사범대')
-      {
-        seteduchats(educhtas => educhats + 1);
-      }
-    }
-    if(currentcollege === '경영대')
-    {
-      settocba();
-    }
-    if(currentcollege === '인문대')
-    {
-      settohum();
-    }
-    if(currentcollege === '사회대')
-    {
-      settosoc();
-    }
-    if(currentcollege === '자연대')
-    {
-      settosci();
-    }
-    if(currentcollege === '공과대')
-    {
-      settoeng();
-    }
-    if(currentcollege === '농생대')
-    {
-      settocals();
-    }
-    if(currentcollege === '생활대')
-    {
-      settoche();
-    }
-    if(currentcollege === '음미대')
-    {
-      settomus();
-    }
-    if(currentcollege === '수의대')
-    {
-      settovet();
-    }
-    if(currentcollege === '약학대')
-    {
-      settopha();
-    }
-    if(currentcollege === '의대')
-    {
-      settomed();
-    }
-    if(currentcollege === '사범대')
-    {
-      settoedu();
-    }
-    
-    setChatMessage('');
   }
-  const settocba=() => {
-    setprintedchats(cbachats);
-    setcurrentcollege('경영대');
-  }
-  const settohum=() => {
-    setprintedchats(humchats);
-    setcurrentcollege('인문대');
-  }
-  const settosoc=() => {
-    setprintedchats(socchats);
-    setcurrentcollege('사회대');
-  }
-  const settosci=() => {
-    setprintedchats(scichats);
-    setcurrentcollege('자연대');
-  }
-  const settoeng=() => {
-    setprintedchats(engchats);
-    setcurrentcollege('공과대');
-  }
-  const settocals=() => {
-    setprintedchats(calschats);
-    setcurrentcollege('농생대');
-  }
-  const settoche=() => {
-    setprintedchats(chechats);
-    setcurrentcollege('생활대');
-  }
-  const settomus=() => {
-    setprintedchats(muschats);
-    setcurrentcollege('음미대');
-  }
-  const settovet=() => {
-    setprintedchats(vetchats);
-    setcurrentcollege('수의대');
-  }
-  const settopha=() => {
-    setprintedchats(phachats);
-    setcurrentcollege('약학대');
-  }
-  const settomed=() => {
-    setprintedchats(medchats);
-    setcurrentcollege('의대');
-  }
-  const settoedu=() => {
-    setprintedchats(educhats);
-    setcurrentcollege('사범대');
-  }
-
-
   return (
     <body>
     <div className="App">
@@ -398,7 +119,6 @@ const BoardPage = ({history}) => {
           </div>}
           <div style={{marginTop : '15px', marginBottom: '10px'}}>
             <div>
-              <textarea id="message-box" type="text" placeholder="응원글을 적고, 단과대를 선택해주세요!" value={chatMessage} onChange={e => setChatMessage(e.target.value)}>{chatMessage}</textarea>
               <TextField
                 label="응원글"
                 variant="outlined"
@@ -446,29 +166,31 @@ const BoardPage = ({history}) => {
           </div>
         </div>
         <div>
-        {<Fill percentage = {printedchats}/>}
+        {<Fill percentage = {numOfChat}/>}
         </div>
-
+        <div>
+          
+        </div>
         <div id = "heart" style = {{position : "absolute", bottom : '290px', left : "850px"}}>
-
+        {currentCollege}
           <img src = {heart} alt = "empty-heart"/>
           <div>
-            <h2 id = "percentnumber" style = {{position : "absolute",width : "425px", textAlign : "center"}}>{printedchats+1}%</h2>
+            <h2 id = "percentnumber" style = {{position : "absolute",width : "425px", textAlign : "center"}}>{numOfChat}%</h2>
           </div>
         </div>
         <div id = "select" style = {{position : "absolute", width : "425px", bottom : "170px", left : "850px"}}>
-            <button id = "cba" onClick = {settocba}>경영대</button>
-            <button id = "hum" onClick = {settohum}>인문대</button>
-            <button id = "soc" onClick = {settosoc}>사회대</button>
-            <button id = "sci" onClick = {settosci}>자연대</button>
-            <button id = "eng" onClick = {settoeng}>공과대</button>
-            <button id = "cals" onClick = {settocals}>농생대</button>
-            <button id = "che" onClick = {settoche}>생활대</button>
-            <button id = "mus" onClick = {settomus}>음미대</button>
-            <button id = "vet" onClick = {settovet}>수의대</button>
-            <button id = "pha" onClick = {settopha}>약학대</button>
-            <button id = "med" onClick = {settomed}>의대</button>
-            <button id = "edu" onClick = {settoedu}>사범대</button>
+            <button id = "cba" onClick = {()=>{changeCurrentCollege('경영대');}}>경영대</button>
+            <button id = "hum" onClick = {()=>{changeCurrentCollege('인문대')}}>인문대</button>
+            <button id = "soc" onClick = {()=>{changeCurrentCollege('사회대')}}>사회대</button>
+            <button id = "sci" onClick = {()=>{changeCurrentCollege('자연대')}}>자연대</button>
+            <button id = "eng" onClick = {()=>{changeCurrentCollege('공과대')}}>공과대</button>
+            <button id = "cals" onClick = {()=>{changeCurrentCollege('농생대')}}>농생대</button>
+            <button id = "che" onClick = {()=>{changeCurrentCollege('생활대')}}>생활대</button>
+            <button id = "mus" onClick = {()=>{changeCurrentCollege('음미대')}}>음미대</button>
+            <button id = "vet" onClick = {()=>{changeCurrentCollege('수의대')}}>수의대</button>
+            <button id = "pha" onClick = {()=>{changeCurrentCollege('약학대')}}>약학대</button>
+            <button id = "med" onClick = {()=>{changeCurrentCollege('의대')}}>의대</button>
+            <button id = "edu" onClick = {()=>{changeCurrentCollege('사범대')}}>사범대</button>
           </div>
     </div>
     </body>

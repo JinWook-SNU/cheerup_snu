@@ -213,29 +213,24 @@ export default class Api {
         return t;
       }, {})
 
-      for (const [key, value] of Object.entries(onlyCollege)) {
-        parse.push({
-          'key': key,
-          'value' : value
-        })
-      }
+      // for (const [key, value] of Object.entries(onlyCollege)) {
+      //   parse.push({
+      //     'key': key,
+      //     'value' : value
+      //   })
+      // }
 
-      function custonSort(a, b) {
-        if(a.total === b.total){return 0}
-        return a.total > b.total ? 1 : -1;
-      }
+      // function custonSort(a, b) {
+      //   if(a.total === b.total){return 0}
+      //   return a.total > b.total ? 1 : -1;
+      // }
         
-        parse.sort(custonSort);
-        console.log(parse,111);
+      //   parse.sort(custonSort);
+      //   console.log(parse,111);
 
-
-      return parse;
+      return onlyCollege;
   })
   }
-
-
-
-
 
   async deletBoard(key) {
     firebase.database().ref('board/' + key).remove();

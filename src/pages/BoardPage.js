@@ -11,6 +11,7 @@ import Icon from '@material-ui/core/Icon';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import heart from './empty_heart.png';
+import FluidMeter from './FluidMeter'
 
 const BoardPage = ({history}) => {
   const [boardList, setBoardList] = useState([]);
@@ -56,8 +57,9 @@ const BoardPage = ({history}) => {
     const interval = setInterval(() => {
       setSeconds(seconds => seconds + 1);
       loadBoardList();
-      setIsLogin(localStorage.getItem('verified'))
-      setUserName(localStorage.getItem('userName'))
+      setIsLogin(localStorage.getItem('verified'));
+      setUserName(localStorage.getItem('userName'));
+      
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -70,9 +72,125 @@ const BoardPage = ({history}) => {
   }
 
 
+  const FluidMeterRender = () => {
+    var fm = new FluidMeter();
+    fm.init({
+      targetContainer: document.getElementById("fluid-meter"),
+      fillPercentage: 14,
+      options: {
+        fontFamily: "Oxygen",
+        drawPercentageSign: true,
+        drawBubbles: true,
+        size: 300,
+        borderWidth: 10,
+        backgroundColor: "#262626",
+        foregroundColor: "#4C4A4A",
+        foregroundFluidLayer: {
+          fillStyle: "#ff69b4",
+          angularSpeed: 90,
+          maxAmplitude: 11,
+          frequency: 25,
+          horizontalSpeed: -200
+        },
+        backgroundFluidLayer: {
+          fillStyle: "pink",
+          angularSpeed: 100,
+          maxAmplitude: 9,
+          frequency: 30,
+          horizontalSpeed: 150
+        }
+      }
+    });
+  
+    var fm2 = new FluidMeter();
+    fm2.init({
+      targetContainer: document.getElementById("fluid-meter-2"),
+      fillPercentage: 80,
+      options: {
+        fontFamily: "Oxygen",
+        drawPercentageSign: true,
+        drawBubbles: true,
+        size: 300,
+        borderWidth: 10,
+        backgroundColor: "#262626",
+        foregroundColor: "#4C4A4A",
+        foregroundFluidLayer: {
+          fillStyle: "#ff69b4",
+          angularSpeed: 90,
+          maxAmplitude: 11,
+          frequency: 25,
+          horizontalSpeed: -200
+        },
+        backgroundFluidLayer: {
+          fillStyle: "pink",
+          angularSpeed: 100,
+          maxAmplitude: 13,
+          frequency: 23,
+          horizontalSpeed: 230
+        }
+      }
+    });
+  
+    var fm3 = new FluidMeter();
+    fm3.init({
+      targetContainer: document.getElementById("fluid-meter-3"),
+      fillPercentage: 45,
+      options: {
+        fontFamily: "Oxygen",
+        drawPercentageSign: true,
+        drawBubbles: true,
+        size: 300,
+        borderWidth: 10,
+        backgroundColor: "#262626",
+        foregroundColor: "#4C4A4A",
+        foregroundFluidLayer: {
+          fillStyle: "#ff69b4",
+          angularSpeed: 90,
+          maxAmplitude: 11,
+          frequency: 25,
+          horizontalSpeed: -200
+        },
+        backgroundFluidLayer: {
+          fillStyle: "#pink",
+          angularSpeed: 100,
+          maxAmplitude: 3,
+          frequency: 22,
+          horizontalSpeed: 20
+        }
+      }
+    });
+  }
+
   return (
     <div className="App">
-        <div></div>
+
+
+
+        {/* <div>
+        <div class="container">
+      <div class="row">
+        <div>
+          <div id="first" class="collegeTitle">경영대</div>
+          <div id="second" class="collegeTitle">경영대</div>
+          <div id="third" class="collegeTitle">경영대</div>
+        </div>
+        <div class="col text-center">
+          <div id="fluid-meter" class="mx-auto"></div>
+        </div>
+        <div class="col text-center">
+          <div id="fluid-meter-2"></div>
+        </div>
+        <div class="col text-center">
+          <div id="fluid-meter-3"></div>
+        </div>
+      </div>
+    </div>
+
+
+    
+        </div> */}
+
+        {FluidMeterRender()}
         <div style={{ backgroundColor: '#B2C6D9', width: '100%', height: '800px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
           {!isLogin ? <div style={{marginTop: '15px'}}>
             <Link className="linkButton" to="/register">

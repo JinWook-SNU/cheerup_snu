@@ -29,10 +29,10 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script src="./js-fluid-meter.js"></script>
+
     <div id="topBar">
     </div>
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div>
           <div id="first" class="collegeTitle">경영대</div>
@@ -49,7 +49,7 @@
           <div id="fluid-meter-3"></div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div id="root"></div>
     <!--
@@ -84,108 +84,22 @@
 
     <script>
 
-      var fm = new FluidMeter();
-      fm.init({
-        targetContainer: document.getElementById("fluid-meter"),
-        fillPercentage: 14,
-        options: {
-          fontFamily: "Oxygen",
-          drawPercentageSign: true,
-          drawBubbles: true,
-          size: 300,
-          borderWidth: 10,
-          backgroundColor: "#262626",
-          foregroundColor: "#4C4A4A",
-          foregroundFluidLayer: {
-            fillStyle: "#ff69b4",
-            angularSpeed: 90,
-            maxAmplitude: 11,
-            frequency: 25,
-            horizontalSpeed: -200
-          },
-          backgroundFluidLayer: {
-            fillStyle: "pink",
-            angularSpeed: 100,
-            maxAmplitude: 9,
-            frequency: 30,
-            horizontalSpeed: 150
-          }
-        }
-      });
-  
-      var fm2 = new FluidMeter();
-      fm2.init({
-        targetContainer: document.getElementById("fluid-meter-2"),
-        fillPercentage: 80,
-        options: {
-          fontFamily: "Oxygen",
-          drawPercentageSign: true,
-          drawBubbles: true,
-          size: 300,
-          borderWidth: 10,
-          backgroundColor: "#262626",
-          foregroundColor: "#4C4A4A",
-          foregroundFluidLayer: {
-            fillStyle: "#ff69b4",
-            angularSpeed: 90,
-            maxAmplitude: 11,
-            frequency: 25,
-            horizontalSpeed: -200
-          },
-          backgroundFluidLayer: {
-            fillStyle: "pink",
-            angularSpeed: 100,
-            maxAmplitude: 13,
-            frequency: 23,
-            horizontalSpeed: 230
-          }
-        }
-      });
-  
-      var fm3 = new FluidMeter();
-      fm3.init({
-        targetContainer: document.getElementById("fluid-meter-3"),
-        fillPercentage: 45,
-        options: {
-          fontFamily: "Oxygen",
-          drawPercentageSign: true,
-          drawBubbles: true,
-          size: 300,
-          borderWidth: 10,
-          backgroundColor: "#262626",
-          foregroundColor: "#4C4A4A",
-          foregroundFluidLayer: {
-            fillStyle: "#ff69b4",
-            angularSpeed: 90,
-            maxAmplitude: 11,
-            frequency: 25,
-            horizontalSpeed: -200
-          },
-          backgroundFluidLayer: {
-            fillStyle: "#pink",
-            angularSpeed: 100,
-            maxAmplitude: 3,
-            frequency: 22,
-            horizontalSpeed: 20
-          }
-        }
-      });
 
       // var topThree = topThreeCollege();
 
       window.onload = function () {
         // 
-        console.log(11)
-        setInterval(()=>{
-          // 
-          //여기에 탑3 숫자를 넣어주면 되는데 값을 전달하는 방법을 모르겠네요ㅜㅠㅠㅠㅠ
-          fm.setPercentage(20);
-          fm2.setPercentage(100);
-          fm3.setPercentage(60);
-          console.log('올라라')
-          // console.log(topThree)
+        // console.log(11)
+        // setInterval(()=>{
+        //   // 
+        //   //여기에 탑3 숫자를 넣어주면 되는데 값을 전달하는 방법을 모르겠네요ㅜㅠㅠㅠㅠ
+        //   fm.setPercentage(20);
+        //   fm2.setPercentage(100);
+        //   fm3.setPercentage(60);
+        //   console.log('올라라')
+        //   // console.log(topThree)
           
-        },2000)
+        // },2000)
 
       };
     </script>

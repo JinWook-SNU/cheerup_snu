@@ -1,6 +1,6 @@
 
 
-function FluidMeter() {
+export default function FluidMeter() {
   
   var context;
   var targetContainer;
@@ -179,10 +179,10 @@ function FluidMeter() {
     // calculate horizontal position
     layer.horizontalPosition += layer.horizontalSpeed * dt;
     if (layer.horizontalSpeed > 0) {
-      layer.horizontalPosition > Math.pow(2, 53) ? 0 : layer.horizontalPosition;
+      layer.horizontalPosition = layer.horizontalPosition > Math.pow(2, 53) ? 0 : layer.horizontalPosition;
     }
     else if (layer.horizontalPosition < 0) {
-      layer.horizontalPosition < -1 * Math.pow(2, 53) ? 0 : layer.horizontalPosition;
+      layer.horizontalPosition = layer.horizontalPosition < -1 * Math.pow(2, 53) ? 0 : layer.horizontalPosition;
     }
 
     var x = 0;

@@ -31,7 +31,7 @@ const BoardPage = ({history}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userStayTime, setUserStayTime] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [currentCollege, setCurrentCollege] = useState('경영대');
+  const [currentCollege, setCurrentCollege] = useState('단과대를 선택해주세요');
   const [numOfChat,setNumOfChat] = useState(0)
 
   const Fill = ({percentage}) => {
@@ -64,7 +64,7 @@ const BoardPage = ({history}) => {
     console.log(college);
     setCurrentCollege(college)
     console.log(currentCollege);
-    loadChatNum(currentCollege);
+    loadChatNum(college);
   }
 
   const handleSelectCollege = (e) => {
@@ -102,7 +102,7 @@ const BoardPage = ({history}) => {
   return (
     <body>
     <div className="App">
-        <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '700px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
+        <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '1000px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
           {!isLogin ? <div style={{marginTop: '15px'}}>
             <Link className="linkButton" to="/register">
             register

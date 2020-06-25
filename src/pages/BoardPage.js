@@ -90,6 +90,7 @@ const BoardPage = ({history}) => {
       loadBoardList();
       setIsLogin(localStorage.getItem('verified'));
       setUserName(localStorage.getItem('userName'));
+      loadChatNum();
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -103,7 +104,7 @@ const BoardPage = ({history}) => {
     <body>
     <div className="App">
         <div style={{ backgroundColor: '#B2C6D9', width: '800px', height: '1000px', border: '1px solid black', overflow: "scroll", overflowX: "hidden"}}>
-          {!isLogin ? <div style={{marginTop: '15px'}}>
+          {!isLogin ? <div className="headBar" style={{marginTop: '15px'}}>
             <Link className="linkButton" to="/register">
             register
           </Link>
@@ -111,9 +112,9 @@ const BoardPage = ({history}) => {
             로그인
           </Link>
           </div> :
-          <div>
-            <div>{userName}님</div>
-            <Button style={{marginRight: "110px"}} onClick={()=>{signOut()}} variant="contained" color="primary" disableElevation>
+          <div className='headBar'>
+            <div id="userName">{userName}님</div>
+            <Button id="logOutButton" style={{}} onClick={()=>{signOut()}} variant="contained" color="primary" disableElevation>
               로그아웃
             </Button>
           </div>}
@@ -178,19 +179,18 @@ const BoardPage = ({history}) => {
             <h2 id = "percentnumber" style = {{position : "absolute",width : "425px", textAlign : "center"}}>{numOfChat}%</h2>
           </div>
         </div>
-        <div id = "select" style = {{position : "absolute", width : "425px", bottom : "170px", left : "850px"}}>
-            <button id = "cba" onClick = {()=>{changeCurrentCollege('경영대');}}>경영대</button>
-            <button id = "hum" onClick = {()=>{changeCurrentCollege('인문대')}}>인문대</button>
-            <button id = "soc" onClick = {()=>{changeCurrentCollege('사회대')}}>사회대</button>
-            <button id = "sci" onClick = {()=>{changeCurrentCollege('자연대')}}>자연대</button>
-            <button id = "eng" onClick = {()=>{changeCurrentCollege('공과대')}}>공과대</button>
-            <button id = "cals" onClick = {()=>{changeCurrentCollege('농생대')}}>농생대</button>
-            <button id = "che" onClick = {()=>{changeCurrentCollege('생활대')}}>생활대</button>
-            <button id = "mus" onClick = {()=>{changeCurrentCollege('음미대')}}>음미대</button>
-            <button id = "vet" onClick = {()=>{changeCurrentCollege('수의대')}}>수의대</button>
-            <button id = "pha" onClick = {()=>{changeCurrentCollege('약학대')}}>약학대</button>
-            <button id = "med" onClick = {()=>{changeCurrentCollege('의대')}}>의대</button>
-            <button id = "edu" onClick = {()=>{changeCurrentCollege('사범대')}}>사범대</button>
+        <div id = "select" style = {{position : "absolute", width : "425px", bottom : "170px", left : "1000px"}}>
+            <Button className = "collegeButton" color="primary" id = "cba" onClick = {()=>{changeCurrentCollege('경영대');}}>경영대</Button>
+            <Button className = "collegeButton" color="primary" id = "hum" onClick = {()=>{changeCurrentCollege('인문대')}}>인문대</Button>
+            <Button className = "collegeButton" color="primary" id = "sci" onClick = {()=>{changeCurrentCollege('자연대')}}>자연대</Button>
+            <Button className = "collegeButton" color="primary" id = "eng" onClick = {()=>{changeCurrentCollege('공과대')}}>공과대</Button>
+            <Button className = "collegeButton" color="primary" id = "cals" onClick = {()=>{changeCurrentCollege('농생대')}}>농생대</Button>
+            <Button className = "collegeButton" color="primary" id = "che" onClick = {()=>{changeCurrentCollege('생활대')}}>생활대</Button>
+            <Button className = "collegeButton" color="primary" id = "mus" onClick = {()=>{changeCurrentCollege('음미대')}}>음미대</Button>
+            <Button className = "collegeButton" color="primary" id = "vet" onClick = {()=>{changeCurrentCollege('수의대')}}>수의대</Button>
+            <Button className = "collegeButton" color="primary" id = "pha" onClick = {()=>{changeCurrentCollege('약학대')}}>약학대</Button>
+            <Button className = "collegeButton" color="primary" id = "med" onClick = {()=>{changeCurrentCollege('의대')}}>의대</Button>
+            <Button className = "collegeButton" color="primary" id = "edu" onClick = {()=>{changeCurrentCollege('사범대')}}>사범대</Button>
           </div>
     </div>
     </body>

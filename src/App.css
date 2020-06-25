@@ -33,10 +33,11 @@
   color: white;
   text-decoration: none;
   width: 60px;
-  height: 60px;
+
   margin-right: 10px;
   border-radius: 10%;
   padding: 10px;
+  float: right;
 }
 
 @keyframes App-logo-spin {
@@ -86,3 +87,16 @@
   right: 0;
   font-size: 6px;
 }
+
+#userName {
+  font-size: 20px;
+  float: right;
+  margin-top: 20px;
+}
+
+#logOutButton {
+  margin-right: 10px;
+  margin-top: 15px;
+  float: right;
+}
+

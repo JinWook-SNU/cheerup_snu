@@ -126,7 +126,7 @@ const BoardPage = ({history}) => {
             { (boardList) ? boardList.map((board) => <Board userEmail={userEmail} board={board} key={board.Key}/>) : <div>게시글없음.</div>}
           </div>
         </div>
-
+      <button onClick={()=>{api.getTopThree()}}>topThree</button>
     </div>
   );
 }

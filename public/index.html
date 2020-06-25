@@ -62,14 +62,28 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    
+
+
+    <button id="getTop">top Three</button>    
 
 
 
 
     <script src="./topThreeCollege"></script>
+    <script src="../src/Api/Api.js"></script>
     <script>
-      
+      getTopThreeE();
+      console.log(getTopThreeE(),11)
+      document.getElementById('getTop').onclick(console.log('dd'));
+      // window.onload = function() {
+      //   document.getElementById('getTop').onclick(console.log('dd'));
+      // }
+
+      // }
+    </script>
+
+    <script>
+
       var fm = new FluidMeter();
       fm.init({
         targetContainer: document.getElementById("fluid-meter"),
@@ -156,10 +170,14 @@
           }
         }
       });
+
       // var topThree = topThreeCollege();
+
       window.onload = function () {
-        
+        // 
+        console.log(11)
         setInterval(()=>{
+          // 
           //여기에 탑3 숫자를 넣어주면 되는데 값을 전달하는 방법을 모르겠네요ㅜㅠㅠㅠㅠ
           fm.setPercentage(20);
           fm2.setPercentage(100);
@@ -168,15 +186,7 @@
           // console.log(topThree)
           
         },2000)
-        document.getElementById("submit-percentage-1").onclick = function () {
-          fm.setPercentage(Number(document.getElementById('percentage-1').value))
-        }
-        document.getElementById("submit-percentage-2").onclick = function () {
-          fm2.setPercentage(Number(document.getElementById('percentage-2').value))
-        }
-        document.getElementById("submit-percentage-3").onclick = function () {
-          fm3.setPercentage(Number(document.getElementById('percentage-3').value))
-        }
+
       };
     </script>
 

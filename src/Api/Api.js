@@ -200,21 +200,39 @@ export default class Api {
 
   async getTopThree() {
     var rows = [];
+    var parse = [];
     return  firebase.database().ref('board').once('value')
     .then((snapshot) => {
       snapshot.forEach((childSnapshot) => {
           var childData = childSnapshot.val();
           rows.unshift(childData.College);
       })
-
+      
       const onlyCollege = rows.reduce((t, a) => {
         t[a] = (t[a] || 0) + 1;
         return t;
       }, {})
 
-      return onlyCollege;
+      for (const [key, value] of Object.entries(onlyCollege)) {
+        parse.push({
+          'key': key,
+          'value' : value
+        })
+      }
+
+      function custonSort(a, b) {
+        if(a.total === b.total){return 0}
+        return a.total > b.total ? 1 : -1;
+      }
+        
+        parse.sort(custonSort);
+        console.log(parse,111);
+
+
+      return parse;
   })
   }
+
 
 
 
@@ -222,5 +240,13 @@ export default class Api {
   async deletBoard(key) {
     firebase.database().ref('board/' + key).remove();
   }
+}
+
+const api = new Api();
+
+export function getTopThreeE() {
+  api.getTopThree()
+  
+
 }
 
